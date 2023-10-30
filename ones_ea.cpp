@@ -1,8 +1,7 @@
-#include "ones_ea.h"
+// SIMPLE EA WITH CROSSOVER AND MUTATION WITH REPLACE WORST SOLUTION TO FIND A SOLUTION WITH ALL 1s
+// STARTING WITH A RANDOM POPULATION OF CANDIDATES.
 
-// mutation works
-// tournament selection works
-// TODO crossover
+#include "ones_ea.h"
 
 float MUT_RATE  = 0.8;
 float CROSSOVER_RATE = 0.8;
@@ -16,13 +15,6 @@ int main()
     int pop_size, solution_length;
     srand(time(0));
 
-    // std::cout << "Enter population size: ";
-    // std::cin >> pop_size;
-    //
-    // std::cout << "Enter solution length: ";
-    // std::cin >> solution_length;
-
-    // int** pop = generate_random_pop(pop_size, solution_length);
     int** pop = generate_random_pop(POP_SIZE, SOLUTION_LENGTH);
     std::cout << "ORIGINAL POPULATION:" << std::endl;
     output_population(pop, POP_SIZE, SOLUTION_LENGTH);
@@ -40,14 +32,12 @@ int main()
         for(j = 0; j < 2; j++)
         {
             mutation(children[j], SOLUTION_LENGTH, MUT_RATE);
-            int replaced = replace_worst_solution(pop, POP_SIZE, SOLUTION_LENGTH, children[j]);
 
             // replace mutated tournament winner only if better than worst solution
-            // replaced ? std::cout << "POPULATION UPDATED\n" : std::cout << "POPULATION NOT UPDATED\n";
+            int replaced = replace_worst_solution(pop, POP_SIZE, SOLUTION_LENGTH, children[j]);
             if(!replaced)
                 delete[] children[j];
         }
-
         delete[] children;
         
         // find the best solution and break if that solution fitness is optimal
