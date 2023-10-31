@@ -6,12 +6,24 @@ void partial_ordered_child(int*, int*, int*, int, int);
 
 int main()
 {
+    srand(time(0));
+
     int parent1[] = {0, 3, 4, 2, 1};
     int parent2[] = {1, 4, 2, 3, 0};
 
+    // outputting parent1 and parent2
+    int i, j;
+    std::cout << "parent1: ";
+    for(i = 0; i < 5; i++)
+        std::cout << parent1[i];
+    std::cout << std::endl << "parent2: ";
+    for(i = 0; i < 5; i++)
+        std::cout << parent2[i];
+    std::cout << std::endl;
+
+
     int** children = ordered_crossover(parent1, parent2, 5);
 
-    int i, j;
     for(i = 0; i < 2; i++)
     {
         int* child = children[i];
@@ -21,7 +33,6 @@ int main()
         }
         std::cout << std::endl;
     }
-    std::cout << std::endl;
     
     return 0;
 }
@@ -39,6 +50,7 @@ int** ordered_crossover(int* parent1, int* parent2, int solution_length)
 
     int i, j;
     int crossover_point = rand() % solution_length;
+    std::cout << "crossover point: " << crossover_point << std::endl;
     for(i = 0; i < crossover_point; i++)
     {
         child1[i] = parent1[i];
