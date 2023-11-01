@@ -33,3 +33,37 @@ int tsp_solution_fitness(int** map, int n, int* solution)
 
     return res;
 }
+
+int tsp_population_fitness(int** map, int population_size, int solution_length, int** pop)
+{
+    int res = 0;
+    int i;
+    for(i = 0; i < population_size; i++)
+        res += tsp_solution_fitness(map, solution_length, pop[i]);
+
+    return res;
+}
+
+int tsp_replace_worst_solution(int** pop, int population_size, int solution_length, int* new_solution, int** map)
+{
+    // funtion returns true or false depending on whether solution was replaced
+    int res = 0;
+
+    // get the position of the worst solution
+    int worst = 0;
+    int i;
+    for(i = 1; i < population_size; i++)
+        if(tsp_solution_fitness(map, solution_length, pop[i]) < tsp_solution_fitness(map, solution_length, pop[worst]))
+            worst = i;
+    
+    // replace the worst solution with the new better solution only if better solution is better
+    if(tsp_solution_fitness(map, solution_length, new_solution) > tsp_solution_fitness(map, solution_length, pop[worst]))
+    {
+        delete[] pop[worst];
+        pop[worst] = new_solution;
+        res = 1;
+    }
+    
+    return res;
+}
+
