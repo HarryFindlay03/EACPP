@@ -42,7 +42,6 @@ int** ordered_crossover(int* parent1, int* parent2, int solution_length)
 
     int i, j;
     int crossover_point = rand() % solution_length;
-    std::cout << "crossover point: " << crossover_point << std::endl;
     for(i = 0; i < crossover_point; i++)
     {
         child1[i] = parent1[i];

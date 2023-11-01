@@ -8,6 +8,9 @@ int GENERATIONS = 50;
 
 int main()
 {
+    // seeding rand
+    srand(time(0));
+
     int n = 5;
     
     // initialising the map
@@ -52,7 +55,13 @@ int main()
                 best = j;
         }
 
-        printf("ITERATION: %d\tPOPULATION FITNESS: %d\tBEST SOLUTION FITNESS: %d\n", i, tsp_population_fitness(map, POPULATION_SIZE, n, pop), tsp_solution_fitness(map, n, pop[best]));
+        printf("ITERATION: %d\tPOPULATION FITNESS: %d\tBEST SOLUTION FITNESS: %d\t", i, tsp_population_fitness(map, POPULATION_SIZE, n, pop), tsp_solution_fitness(map, n, pop[best]));
+        
+        std::cout << "BEST SOLUTION: ";
+        int x;
+        for(x = 0; x < n; x++)
+            std::cout << pop[best][x];
+        std::cout << std::endl;
     }
 
 
