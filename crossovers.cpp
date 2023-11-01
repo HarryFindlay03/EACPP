@@ -1,40 +1,32 @@
-#include <iostream>
-#include <cstdlib>
+#include "crossovers.h"
 
-int** ordered_crossover(int*, int*, int);
-void partial_ordered_child(int*, int*, int*, int, int);
-
-int main()
+int** crossover(int* parent1, int* parent2, int solution_length, float crossover_rate)
 {
-    srand(time(0));
-
-    int parent1[] = {0, 3, 4, 2, 1};
-    int parent2[] = {1, 4, 2, 3, 0};
-
-    // outputting parent1 and parent2
-    int i, j;
-    std::cout << "parent1: ";
-    for(i = 0; i < 5; i++)
-        std::cout << parent1[i];
-    std::cout << std::endl << "parent2: ";
-    for(i = 0; i < 5; i++)
-        std::cout << parent2[i];
-    std::cout << std::endl;
-
-
-    int** children = ordered_crossover(parent1, parent2, 5);
-
-    for(i = 0; i < 2; i++)
-    {
-        int* child = children[i];
-        for(j = 0; j < 5; j++)
-        {
-            std::cout << *child++;
-        }
-        std::cout << std::endl;
-    }
+    float ran = (float)rand() / (float)RAND_MAX;
+    int crossover_point = rand() % solution_length;
     
-    return 0;
+    int* child1 = new int[solution_length];
+    int* child2 = new int[solution_length];
+    int i;
+
+    
+    // currently no crossover rate
+    for(i = 0; i < crossover_point; i++)
+    {
+        child1[i] = parent1[i];
+        child2[i] = parent2[i];
+    }
+    for(;i < solution_length; i++)
+    {
+        child1[i] = parent2[i];
+        child2[i] = parent1[i];
+    }
+
+    int** children = new int*[2];
+    children[0] = child1;
+    children[1] = child2;
+
+    return children;
 }
 
 int** ordered_crossover(int* parent1, int* parent2, int solution_length)
