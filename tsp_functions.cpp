@@ -53,11 +53,11 @@ int tsp_replace_worst_solution(int** pop, int population_size, int solution_leng
     int worst = 0;
     int i;
     for(i = 1; i < population_size; i++)
-        if(tsp_solution_fitness(map, solution_length, pop[i]) < tsp_solution_fitness(map, solution_length, pop[worst]))
+        if(tsp_solution_fitness(map, solution_length, pop[i]) > tsp_solution_fitness(map, solution_length, pop[worst]))
             worst = i;
     
     // replace the worst solution with the new better solution only if better solution is better
-    if(tsp_solution_fitness(map, solution_length, new_solution) > tsp_solution_fitness(map, solution_length, pop[worst]))
+    if(tsp_solution_fitness(map, solution_length, new_solution) < tsp_solution_fitness(map, solution_length, pop[worst]))
     {
         delete[] pop[worst];
         pop[worst] = new_solution;

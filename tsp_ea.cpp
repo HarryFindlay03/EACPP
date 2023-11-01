@@ -20,6 +20,12 @@ int main()
     int three[] = {88, 65, 11, 0, 1000};
     int four[] = {200, 404, 16, 1000, 0};
 
+    // int zero[]  = {0, 3, 4, 2, 7};
+    // int one[] = {3, 0, 4, 6, 3};
+    // int two[] = {4, 4, 0, 5, 8};
+    // int three[] = {2, 6, 5, 0, 6};
+    // int four[] = {7, 3, 8, 6, 0};
+
     int** map = new int*[5];
     map[0] = zero;
     map[1] = one;

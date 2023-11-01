@@ -36,7 +36,7 @@ int* tsp_get_tournament_winner(int** pool, int tournament_size, int solution_len
     
     int best_pos = 0;
     for(i = 1; i < tournament_size; i++)
-        if(temp_res[i] > temp_res[best_pos])
+        if(temp_res[i] < temp_res[best_pos])
             best_pos = i;
     
     delete[] temp_res;
