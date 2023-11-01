@@ -1,5 +1,7 @@
 #include "tsp_ea.h"
 
+int POPULATION_SIZE = 10;
+
 int main()
 {
     int n = 5;
@@ -19,12 +21,24 @@ int main()
     map[4] = four;
 
     int i, j;
+    std::cout << "MAP" << std::endl;
     for(i = 0; i < n; i++)
     {
         for(j = 0; j < n; j++)
             printf("%3d", map[i][j]);
         std::cout << std::endl;
     }
+
+    // generate random tsp population
+    int** pop = generate_random_tsp_population(POPULATION_SIZE, n);
+    std::cout << "Random population!" << std::endl;
+    for(i = 0; i < n; i++)
+    {
+        for(j = 0; j < n; j++)
+            printf("%d", pop[i][j]);
+        std::cout << std::endl;
+    }
+
 
     return 0;
 }
